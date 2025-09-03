@@ -1,113 +1,358 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Krupal Tisgaonkar's Portfolio</title>
-    <link rel="stylesheet" href="assets/styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Poppins" rel=stylesheet>
-    <script src = "assets/js/fancy.js" defer></script>
-    <link rel="shortcut icon" href="assets/images/nobodycares.jpg" type="image/x-icon">
-    <script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-    </script>
-    <script type="text/javascript">
-    (function(){
-        emailjs.init({
-            publicKey: "Lepg-1q4LfwZjC54w",
-        });
-    })();
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Krupal Tisgaonkar - Terminal Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+--background: #1e1e1e;
+--text: #e0e0e0;
+--prompt: #4caf50;
+--output: #cfd8dc;
+--highlight: #ff4081;
+--error: #ff5252;
+--header-bg: #e0e0e0;
+--header-btn-red: #ff5f57;
+--header-btn-yellow: #ffbd2e;
+--header-btn-green: #28c840;
+--contact-color: #00bcd4;
+--github-color: #ff9800;
+--link-btn-bg: #444;
+--link-btn-hover: #666;
+--link-btn-text: #fff;
+}
+
+    body {
+      margin: 0;
+      background-color: #121212;
+      font-family: 'Fira Code', monospace;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .terminal-wrapper {
+      width: 80%;
+      max-width: 900px;
+      background: var(--background);
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      overflow: hidden;
+    }
+
+    .terminal-header {
+      background: var(--header-bg);
+      display: flex;
+      align-items: center;
+      padding: 6px 12px;
+    }
+
+    .btn {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+    .btn.red { background: var(--header-btn-red); }
+    .btn.yellow { background: var(--header-btn-yellow); }
+    .btn.green { background: var(--header-btn-green); }
+
+    .terminal {
+      padding: 20px;
+      height: 500px;
+      overflow-y: auto;
+      color: var(--text);
+      background-color: var(--background);
+      scrollbar-width: thin;
+      scrollbar-color: var(--prompt) var(--background);
+    }
+
+    .line {
+      display: flex;
+      white-space: pre-wrap;
+    }
+
+    .prompt {
+      color: var(--prompt);
+      margin-right: 8px;
+    }
+
+    .input {
+      outline: none;
+      flex-grow: 1;
+    }
+
+    .output, .contact-output {
+      color: var(--output);
+      margin: 6px 0 14px 20px;
+      white-space: pre-wrap;
+      padding: 10px 15px;
+      background-color: rgba(255,255,255,0.05);
+      border-radius: 6px;
+      font-size: 0.95em;
+    }
+
+    .output .command {
+      color: var(--highlight);
+      font-weight: bold;
+    }
+
+    .error {
+      color: var(--error);
+      margin: 6px 0 14px 20px;
+      padding: 10px 15px;
+      background-color: rgba(255,0,0,0.05);
+      border-radius: 6px;
+    }
+
+    .ascii {
+      color: var(--prompt);
+      margin-bottom: 20px;
+    }
+
+    .contact {
+      color: var(--contact-color);
+      font-weight: bold;
+    }
+
+    .github {
+      color: var(--github-color);
+      font-weight: bold;
+    }
+    
+/* New button-style links */
+/* Updated link-button spacing */
+.link-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  margin: 8px 0; /* increased spacing between links */
+  margin-right:30px;
+  background-color: #333;
+  color: var(--text);
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.95em;
+  transition: background 0.2s, transform 0.1s;
+}
+.link-button:hover {
+  background-color: #444;
+  transform: translateY(-1px);
+}
+.link-button svg {
+  width: 14px;
+  height: 14px;
+  fill: var(--text);
+}
+
+.link-desc {
+  margin: 2px 0 10px 6px; /* space below each link */
+  font-size: 0.85em;
+  color: var(--output);
+  font-style: italic;
+}
+
+  </style>
 </head>
 <body>
-    <div id = "navbar">
-        <ul>
-            <li onclick = "window.location.href = '#'">Home</li>
-            <li onclick = "window.location.href = '#about'">About</li>
-            <li onclick = "window.location.href = '#my-projects'">My Projects</li>
-            <li onclick = "window.location.href = '#contact'">Contact</li>
-        </ul>
+  <div class="terminal-wrapper">
+    <div class="terminal-header">
+      <div class="btn red"></div>
+      <div class="btn yellow"></div>
+      <div class="btn green"></div>
     </div>
-    <canvas id = "Matrix"></canvas>
-    <header>
-        <div>
-            <div class = "center">
-                HI, I AM <br><span id = "first-stuff">KRUPAL TISGAONKAR.</span><br> I am a <span id = "typing-effect-features"></span><span id = "input-cursor">|</span><br><br>
-                <div id="second-part">Explore who I am, by Scrolling <strong>↓</strong></div>
-            </div>
-        </div>
-    </header>
-    <div id = "about">
-        <div class="center">
-            <div class="right">
-                <img src="assets/images/nobodycares.png" onclick = ""class = "card"width = "30%"alt="a picture of me">
-            </div>
-            <div class="left card" onclick = "">
-                <div>
-                Hello! I am Krupal Tisgaonkar, a middle schooler in Marshall Middle School, San Diego, CA. I am enthusiastic about computers and love coding. I am mainly experienced in frontend development like coding in JS, CSS, and HTML. I am not a pro, but am continuing to further progress my knowledge by creating more web applications like this. When I am out of the coding world, I am usually doing homework or playing soccer. However, I am also interested in microbiology, and the world that we cannot see.
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id = "my-projects">
-        <div class="center">
-            <div class = "table">
-                <div class="cell">
-                    <div class = "container card" onclick="window.location.href = '//evadespacepirates.netlify.app'">
-                        <div class = "image">
-                            <img src="assets/images/space_invaders_logo.png" alt=" logog">
-                        </div>
-                        <div class = "context">
-                            My very first project I deployed was a remake of Space Invaders. I made this without using the canvas feature.
-                        </div>
-                    </div>
-                </div>
-                <div class="cell">
-                    <div class = "container card" onclick="window.location.href = '//github.com/krupaltisgaonkar/pytorch-yolo'">
-                        <div class = "image">
-                            <img src="assets/images/yolo-ouput.jpg" alt=" logog">
-                        </div>
-                        <div class = "context">
-                            For FLL (First Lego League), I had to train an AI to recognize fish. I used Google Colab, and I trained it on yolo
-                        </div>
-                    </div>
-                </div>
-                <div class="cell">
-                    <div class = "container card" onclick="window.location.href = '//github.com/krupaltisgaonkar/pytorch-faster_rcnn'">
-                        <div class = "image">
-                            <img src="assets/images/faster-rcnn-output.jpg" alt=" logog">
-                        </div>
-                        <div class = "context">
-                            For FLL (First Lego League), I had to train an AI to recognize fish. I used Google Colab, and I trained it on faster rcnn, as an alternate way to see if it was more accurate.
-                        </div>
-                    </div>
-                </div>
-                <div class="cell">
-                    <div class = "container card" onclick="window.location.href = 'https://krupaltisgaonkar.github.io/chat'">
-                        <div class = "image">
-                            <img src="assets/images/chat.png" alt=" logog">
-                        </div>
-                        <div class = "context">
-                            I made a chatting website using firebase that uses rooms with different keys to chat with each other.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="experience">
-        I am experienced in JS, CSS, HTML, Python, a little bit of C.
-    </div>
-    <div id="contact">
-        <div class="center">
-            <span id = "green"></span>
-            <span id = "red"></span>
-            If you have any questions, or want to talk to me:
-            <input type="text" onclick="" id="name" placeholder="Ur name"> 
-            <input type="text" onclick="" id="email" placeholder="Ur email">
-            <textarea onclick="" id="message" placeholder="some message"></textarea>
-            <button onclick = "" id = "send-mail">Send</button>
-        </div>
-    </div>
+    <div class="terminal" id="terminal"></div>
+  </div>
+  <script>
+    const terminal = document.getElementById("terminal");
+const commands = {
+help: "Available commands: [<span class='command'>about</span>, <span class='command'>skills</span>, <span class='command'>projects</span>, <span class='command'>interests</span>, <span class='command'>contact</span>, <span class='command'>links</span>, <span class='command'>clear</span>]",
+about: "I'm a passionate middle schooler in San Diego, CA, building digital experiences and AI projects.",
+skills: `\n - Languages: SQL, JavaScript, Python, Node.js, HTML, CSS\n - Libraries: PyTorch, TensorFlow, Postgres\n - Hardware: Raspberry Pi, Arduino`,
+projects: `\n - <span class='command'>Firebase Chat App</span>: Real-time messaging application.\n - <span class='command'>Classic Game Clones</span>: Recreated several retro games.\n - <span class='command'>AI Fish Recognition</span>: Trained models with YOLO & Faster R-CNN.`,
+interests: "Soccer, academics, microbiology, and (of course) coding.",
+contact: `Email: <span class='contact'>krupaldeveloper@gmail.com</span>\nGitHub: <span class='github'>github.com/lolfactor39</span>`,
+links: `
+<a class='link-button' href='https://lolfactor39.github.io/space-invaders' target='_blank'>
+  Space Invaders <span class='icon'>\u2197</span>
+</a>
+<div class="link-desc">A browser-based classic arcade shooter game I built.</div>
+
+<a class='link-button' href='https://github.com/lolfactor39/pytorch-faster_rcnn' target='_blank'>
+  Faster R-CNN <span class='icon'>\u2197</span>
+</a>
+<div class="link-desc">A PyTorch project implementing Faster R-CNN for object detection.</div>
+
+<a class='link-button' href='https://github.com/lolfactor39/pytorch-yolo' target='_blank'>
+  YOLO <span class='icon'>\u2197</span>
+</a>
+<div class="link-desc">A PyTorch implementation of YOLO for real-time object detection.</div>
+`
+};
+
+    let currentLine, inputSpan;
+    let history = [];
+    let historyIndex = -1;
+    let isTyping = false;
+
+    const welcomeBanner = `
+<pre class="ascii">
+██╗  ██╗██████╗ ██╗   ██╗██████╗  █████╗ ██╗     
+██║ ██╔╝██╔══██╗██║   ██║██╔══██╗██╔══██╗██║     
+█████╔╝ ██████╔╝██║   ██║██████╔╝███████║██║     
+██╔═██╗ ██╔══██╗██║   ██║██╔═══╝ ██╔══██║██║     
+██║  ██╗██║  ██║╚██████╔╝██║     ██║  ██║██████╗
+╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝  ╚═╝╚═════╝
+</pre>
+Welcome to my interactive portfolio.
+Type '<span class="command">help</span>' to see the list of available commands.
+`;
+
+    function typewriter(element, text, callback = () => {}) {
+        isTyping = true;
+        let i = 0;
+        element.innerHTML = "";
+        const interval = setInterval(() => {
+            if (i < text.length) {
+                if (text.charAt(i) === '<') {
+                    const closingTagIndex = text.indexOf('>', i);
+                    if (closingTagIndex !== -1) {
+                        element.innerHTML += text.substring(i, closingTagIndex + 1);
+                        i = closingTagIndex;
+                    }
+                } else {
+                    element.innerHTML += text.charAt(i);
+                }
+                i++;
+                terminal.scrollTop = terminal.scrollHeight;
+            } else {
+                clearInterval(interval);
+                isTyping = false;
+                callback();
+            }
+        }, 20);
+    }
+
+    function initTerminal() {
+        const banner = document.createElement('div');
+        banner.innerHTML = welcomeBanner;
+        terminal.appendChild(banner);
+        newLine();
+    }
+
+    function newLine() {
+      currentLine = document.createElement("div");
+      currentLine.classList.add("line");
+      currentLine.innerHTML = '<span class="prompt">krupal@portfolio:~$</span><span class="input" contenteditable="true"></span>';
+      terminal.appendChild(currentLine);
+      inputSpan = currentLine.querySelector(".input");
+      inputSpan.focus();
+      terminal.scrollTop = terminal.scrollHeight;
+      inputSpan.addEventListener("keydown", handleKeydown);
+    }
+
+    function handleKeydown(e) {
+      if (isTyping) {
+        e.preventDefault();
+        return;
+      }
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const command = inputSpan.textContent.trim();
+        inputSpan.setAttribute('contenteditable', 'false');
+        history.push(command);
+        historyIndex = history.length;
+        if (command === "clear") {
+            terminal.innerHTML = "";
+            newLine();
+        } else if (commands[command]) {
+    const output = document.createElement("div");
+    output.classList.add(command === 'contact' ? 'contact-output' : 'output');
+    terminal.appendChild(output);
+
+    // Special handling for projects/links command
+    if (command === 'links') {
+        const projects = [
+            { name: 'Space Invaders', url: 'https://lolfactor39.github.io/space-invaders' },
+            { name: 'Faster R-CNN', url: 'https://github.com/lolfactor39/pytorch-faster_rcnn' },
+            { name: 'YOLO', url: 'https://github.com/lolfactor39/pytorch-yolo' }
+        ];
+        projects.forEach(proj => {
+            const linkButton = document.createElement('a');
+            linkButton.href = proj.url;
+            linkButton.target = "_blank";
+            linkButton.classList.add('link-button');
+            linkButton.innerHTML = `${proj.name} 
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z"/></svg>`;
+            output.appendChild(linkButton);
+        });
+        newLine(); // move to the next line after adding links
+    } else {
+        typewriter(output, commands[command], newLine);
+    }
+}
+ else if (command !== "") {
+            const error = document.createElement("div");
+            error.classList.add("error");
+            terminal.appendChild(error);
+            const errorText = `command not found: ${command}`;
+            typewriter(error, errorText, newLine);
+            
+            
+            
+        } else {
+            newLine();
+      }
+    } else if (e.key === "ArrowUp") {
+          e.preventDefault();
+          if (historyIndex > 0) {
+              historyIndex--;
+              inputSpan.textContent = history[historyIndex];
+              placeCursorAtEnd(inputSpan);
+          }
+    } else if (e.key === "ArrowDown") {
+          e.preventDefault();
+          if (historyIndex < history.length - 1) {
+              historyIndex++;
+              inputSpan.textContent = history[historyIndex];
+              placeCursorAtEnd(inputSpan);
+          } else {
+              historyIndex = history.length;
+              inputSpan.textContent = "";
+          }
+    } else if (e.ctrlKey && e.key.toLowerCase() === "l") {
+          e.preventDefault();
+          terminal.innerHTML = "";
+          newLine();
+    }
+  }
+
+  function placeCursorAtEnd(el) {
+      el.focus();
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      range.collapse(false);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+  }
+
+  terminal.addEventListener('click', () => {
+      if(inputSpan) {
+          inputSpan.focus();
+      }
+  });
+
+  initTerminal();
+  </script>
 </body>
 </html>
