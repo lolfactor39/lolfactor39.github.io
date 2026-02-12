@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "predeploy": "npm run build && copy dist\\index.html dist\\404.html",
+    "deploy": "gh-pages -d dist -r https://github.com/lolfactor39/lolfactor39.github.io.git",
     "lint": "eslint .",
     "preview": "vite preview"
   },
